@@ -15,7 +15,8 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 mongoose.connect("mongodb://localhost/login_reg_1");
 var UserSchema = new mongoose.Schema({
-    email: {type: String, required: true},
+    email: {type: String, required: true, unique: true,
+        match: [/\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]+)\z/i, 'Please fill a valid email address']},
     first_name: {type: String, required: true},
     last_name: {type: String, required: true},
     password: {type: String, required: true},
